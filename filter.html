@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Filter</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      .container {
+        max-width: 1140px;
+        margin: auto;
+        text-align: center;
+      }
+
+      img {
+        width: 80%;
+        margin: auto;
+      }
+
+      .flex {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+      }
+
+      .flex-item {
+        flex-basis: 50%;
+        padding: 1rem;
+        display: flex;
+      }
+
+      .info {
+        flex-basis: 75%;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>The Menu</h1>
+      <button id="all">All</button>
+      <button id="breakfast">Breakfast</button>
+      <button id="lunch">Lunch</button>
+      <button id="dinner">Dinner</button>
+      <div class="flex">
+        <!-- <div class="flex-item">
+          <input type="hidden" name="category" value="" />
+          <img src="img/0.jpg" alt="" />
+          <div class="info">
+            <h2 id="title">Omelet</h2>
+            <span id="price">$15.99</span>
+            <p id="desc">
+              Lorem ipsum dolor sit amet consectetur adipisicing elit.
+              Voluptatibus illum ab nulla ut animi earum iusto architecto fuga
+              autem, voluptas harum odio cumque ea sint minima dolore maiores
+              quaerat nostrum?
+            </p>
+          </div>
+        </div> -->
+      </div>
+    </div>
+    <script>
+      const arr = [
+        {
+          id: 0,
+          img: "./img/" + this.id + ".jpg",
+          title: "omelet",
+          price: 15,
+          desc: `Lorem ipsum dolor sit amet consectetur adipisicing elit.
+              Voluptatibus illum ab nulla ut animi earum iusto architecto fuga
+              autem, voluptas harum odio cumque ea sint minima dolore maiores
+              quaerat nostrum?`,
+          category: "lunch",
+        },
+        {
+          id: 1,
+          img: "./img/" + this.id + ".jpg",
+          title: "rendang",
+          price: 11,
+          desc: `Lorem ipsum dolor sit amet consectetur adipisicing elit.
+              Voluptatibus illum ab nulla ut animi earum iusto architecto fuga
+              autem, voluptas harum odio cumque ea sint minima dolore maiores
+              quaerat nostrum?`,
+          category: "lunch",
+        },
+        {
+          id: 2,
+          img: "./img/" + this.id + ".jpg",
+          title: "orek",
+          price: 15,
+          desc: `Lorem ipsum dolor sit amet consectetur adipisicing elit.
+              Voluptatibus illum ab nulla ut animi earum iusto architecto fuga
+              autem, voluptas harum odio cumque ea sint minima dolore maiores
+              quaerat nostrum?`,
+          category: "lunch",
+        },
+        {
+          id: 3,
+          img: "./img/" + this.id + ".jpg",
+          title: "pudding",
+          price: 5,
+          desc: `Lorem ipsum dolor sit amet consectetur adipisicing elit.
+              Voluptatibus illum ab nulla ut animi earum iusto architecto fuga
+              autem, voluptas harum odio cumque ea sint minima dolore maiores
+              quaerat nostrum?`,
+          category: "dinner",
+        },
+        {
+          id: 4,
+          img: "./img/" + this.id + ".jpg",
+          title: "soup",
+          price: 10,
+          desc: `Lorem ipsum dolor sit amet consectetur adipisicing elit.
+              Voluptatibus illum ab nulla ut animi earum iusto architecto fuga
+              autem, voluptas harum odio cumque ea sint minima dolore maiores
+              quaerat nostrum?`,
+          category: "dinner",
+        },
+        {
+          id: 5,
+          img: "./img/" + this.id + ".jpg",
+          title: "soto",
+          price: 25,
+          desc: `Lorem ipsum dolor sit amet consectetur adipisicing elit.
+              Voluptatibus illum ab nulla ut animi earum iusto architecto fuga
+              autem, voluptas harum odio cumque ea sint minima dolore maiores
+              quaerat nostrum?`,
+          category: "dinner",
+        },
+        {
+          id: 6,
+          img: "./img/" + this.id + ".jpg",
+          title: "ice cream",
+          price: 5,
+          desc: `Lorem ipsum dolor sit amet consectetur adipisicing elit.
+              Voluptatibus illum ab nulla ut animi earum iusto architecto fuga
+              autem, voluptas harum odio cumque ea sint minima dolore maiores
+              quaerat nostrum?`,
+          category: "breakfast",
+        },
+        {
+          id: 7,
+          img: "./img/" + this.id + ".jpg",
+          title: "fried rice",
+          price: 11,
+          desc: `Lorem ipsum dolor sit amet consectetur adipisicing elit.
+              Voluptatibus illum ab nulla ut animi earum iusto architecto fuga
+              autem, voluptas harum odio cumque ea sint minima dolore maiores
+              quaerat nostrum?`,
+          category: "breakfast",
+        },
+        {
+          id: 8,
+          img: "./img/" + this.id + ".jpg",
+          title: "lontong",
+          price: 12,
+          desc: `Lorem ipsum dolor sit amet consectetur adipisicing elit.
+              Voluptatibus illum ab nulla ut animi earum iusto architecto fuga
+              autem, voluptas harum odio cumque ea sint minima dolore maiores
+              quaerat nostrum?`,
+          category: "breakfast",
+        },
+        {
+          id: 9,
+          img: "./img/" + this.id + ".jpg",
+          title: "donut",
+          price: 1,
+          desc: `Lorem ipsum dolor sit amet consectetur adipisicing elit.
+              Voluptatibus illum ab nulla ut animi earum iusto architecto fuga
+              autem, voluptas harum odio cumque ea sint minima dolore maiores
+              quaerat nostrum?`,
+          category: "breakfast",
+        },
+      ];
+
+      const flex = document.querySelector(".flex");
+      const all = document.getElementById("all");
+      const breakfast = document.getElementById("breakfast");
+      const lunch = document.getElementById("lunch");
+      const dinner = document.getElementById("dinner");
+      const btn = document.querySelectorAll("button");
+
+      let dataShow = arr;
+
+      const showData = () => {
+        flex.innerHTML = "";
+        dataShow.forEach((e) => {
+          const str = `<div class="flex-item">
+          <input type="hidden" name="category" value="${e.category}" />
+          <img src="./img/${e.id}.jpg" alt="" />
+          <div class="info">
+            <h2 id="title">${e.title}</h2>
+            <span id="price">$${e.price}</span>
+            <p id="desc">
+              ${e.desc}
+            </p>
+          </div>
+        </div>`;
+          flex.insertAdjacentHTML("beforeend", str);
+        });
+      };
+
+      btn.forEach((e) => {
+        addEventListener("click", (e) => {
+          if (e.target.id == "all") {
+            dataShow = arr;
+          } else if (e.target.id == "breakfast") {
+            dataShow = arr.filter((e) => e.category == "breakfast");
+          } else if (e.target.id == "lunch") {
+            dataShow = arr.filter((e) => e.category == "lunch");
+          } else if (e.target.id == "dinner") {
+            dataShow = arr.filter((e) => e.category == "dinner");
+          }
+          console.log(dataShow);
+          showData();
+        });
+      });
+      showData();
+    </script>
+  </body>
+</html>

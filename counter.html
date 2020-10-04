@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Counter</title>
+  </head>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      display: flex;
+      height: 100vh;
+    }
+    .content {
+      margin: auto;
+      text-align: center;
+    }
+    #score {
+      font-weight: bold;
+      font-size: 2rem;
+    }
+
+    button {
+      padding: 1rem;
+      margin: 1rem;
+    }
+  </style>
+  <body>
+    <div class="content">
+      <div id="score">0</div>
+      <button id="minus">Minus</button>
+      <button id="reset">Reset</button>
+      <button id="plus">Plus</button>
+    </div>
+    <script>
+      const score = document.getElementById("score");
+      const minus = document.getElementById("minus");
+      const reset = document.getElementById("reset");
+      const plus = document.getElementById("plus");
+
+      let total = 0;
+
+      document.querySelector(".content").addEventListener("click", (e) => {
+        if (e.target == minus) total -= 1;
+        else if (e.target == reset) total = 0;
+        else if (e.target == plus) total += 1;
+        score.textContent = total;
+      });
+    </script>
+  </body>
+</html>

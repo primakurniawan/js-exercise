@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Show</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      body {
+        display: flex;
+        height: 100vh;
+      }
+      .container {
+        max-width: 50vw;
+        margin: auto;
+      }
+      button {
+        float: right;
+      }
+      .show {
+        display: none;
+      }
+      .show-on {
+        display: block;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="q1">
+        <button id="p-1">+</button>
+        <h1>This is the question 1</h1>
+        <div class="show" id="s-1">
+          <hr />
+          <p>
+            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Earum ex
+            consectetur quasi, similique non est voluptas fugiat rem at. Atque
+            nesciunt ab earum placeat nulla accusantium voluptatum assumenda
+            omnis unde?
+          </p>
+        </div>
+      </div>
+      <div class="q2">
+        <button id="p-2">+</button>
+        <h1>This is the question 2</h1>
+        <div class="show" id="s-2">
+          <hr />
+          <p>
+            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Natus eum
+            voluptates minus iure praesentium, ducimus placeat repudiandae
+            molestiae distinctio provident fuga et totam commodi voluptatum
+            sapiente ex? Nulla, reprehenderit itaque!
+          </p>
+        </div>
+      </div>
+      <div class="q3">
+        <button id="p-3">+</button>
+        <h1>This is the question 3</h1>
+        <div class="show" id="s-3">
+          <hr />
+          <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum
+            velit voluptate maiores! Tempora consequuntur eum, alias inventore
+            eligendi eius laudantium optio natus asperiores magnam quae modi!
+            Eligendi suscipit eum earum?
+          </p>
+        </div>
+      </div>
+    </div>
+    <script>
+      const btn = document.querySelectorAll("button");
+      btn.forEach((eBtn) =>
+        eBtn.addEventListener("click", (e) => {
+          console.log();
+          if (eBtn.textContent == "+") eBtn.textContent = "-";
+          else if (eBtn.textContent == "-") eBtn.textContent = "+";
+          const num = eBtn.id.split("-")[1];
+          const show = document.getElementById(`s-${num}`);
+          show.classList.toggle("show-on");
+        })
+      );
+    </script>
+  </body>
+</html>

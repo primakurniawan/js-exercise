@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Navbar</title>
+    <style>
+      nav {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+      }
+
+      .logo {
+        font-size: 2rem;
+        font-weight: bold;
+      }
+
+      ul {
+        margin-right: 3rem;
+      }
+
+      ul li {
+        list-style: none;
+        display: inline-block;
+        padding: 1rem;
+      }
+
+      ul li a {
+        text-decoration: none;
+        color: #777;
+      }
+
+      .hamburger {
+        position: fixed;
+        right: 0;
+        top: 0;
+        transform: translate(-2rem, 2rem);
+        visibility: hidden;
+      }
+      @media only screen and (max-width: 700px) {
+        ul {
+          flex-basis: 100%;
+          display: none;
+        }
+        ul li {
+          display: block;
+        }
+        .hamburger,
+        .visible {
+          visibility: visible;
+          display: block;
+        }
+      }
+      header,
+      section {
+        height: 100vh;
+      }
+    </style>
+  </head>
+  <body>
+    <nav>
+      <div class="logo">Logo</div>
+      <ul>
+        <li><a href="#home">Home</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#price">Price</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+    <header id="home">
+      <h1>This is the Home</h1>
+    </header>
+    <section id="about">
+      <h1>This is About Page</h1>
+    </section>
+    <section id="price">
+      <h1>This is the Price section</h1>
+    </section>
+    <section id="contact">
+      <h1>The Contact</h1>
+    </section>
+    <button class="hamburger">===</button>
+    <script>
+      const btn = document.querySelector(".hamburger");
+      const ul = document.querySelector("ul");
+
+      btn.addEventListener("click", (e) => {
+        ul.classList.toggle("visible");
+      });
+
+      const link = document.querySelectorAll("a");
+      let dest = [];
+      const nav = link.forEach((e) => {
+        if (e.href.includes("#")) {
+          let address = e.href.split("#")[1];
+          dest.push(address);
+          e.addEventListener("click", (e) => {
+            e.preventDefault();
+            const to = document.getElementById(address);
+            console.log(to.offsetTop);
+            window.scrollTo({
+              left: 0,
+              top: to.offsetTop,
+            });
+          });
+        }
+      });
+    </script>
+  </body>
+</html>

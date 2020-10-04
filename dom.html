@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DOM</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      html,
+      body {
+        font-size: clamp(12px, 16px, 20px);
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      }
+
+      .container {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+      }
+
+      input {
+        padding: 1rem;
+        border-radius: 1rem;
+        outline: none;
+        border: 1px solid orange;
+        background-color: transparent;
+      }
+
+      ul {
+        padding: 1rem;
+      }
+
+      ul li {
+        list-style: none;
+        margin: 1rem auto;
+      }
+
+      span {
+        border-radius: 1rem;
+        padding: 1rem;
+        display: inline-block;
+      }
+
+      .btn-delete {
+        background: red;
+        display: inline-block;
+      }
+
+      .book-title {
+        background-color: aliceblue;
+      }
+
+      h1 {
+        margin-bottom: 1rem;
+        border-bottom: 1px solid orange;
+      }
+
+      .btn-delete {
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Reading List</h1>
+      <input type="text" name="" id="search-text" placeholder="Search Book" />
+      <ul id="book-list">
+        <!-- <li class="book-item" id="book-0">
+          <span class="book-title">Lorem ipsum dolor sit amet.</span>
+          <span class="btn-delete">delete</span>
+        </li> -->
+      </ul>
+      <form id="add-book">
+        <input type="text" id="add-text" placeholder="Add Book" />
+        <input type="submit" id="add-btn" />
+      </form>
+    </div>
+    <script>
+      let books = [];
+
+      class Book {
+        constructor(id, title) {
+          this.id = id;
+          this.title = title;
+        }
+      }
+
+      const dom = () => {
+        return {
+          searchText: document.getElementById("search-text"),
+          btnDelete: document.querySelector(".btn-delete"),
+          addText: document.getElementById("add-text"),
+          addBtn: document.getElementById("add-btn"),
+          bookList: document.getElementById("book-list"),
+        };
+      };
+
+      const updateDom = (books) => {
+        dom().bookList.innerHTML = "";
+        if (books.length != 0) {
+          books.forEach((e) => {
+            let str = `
+               <li class="book-item" id="book-${e.id}">
+                <span class="book-title">${e.title}</span>
+                <span class="btn-delete">delete</span>
+              </li>
+                `;
+            dom().bookList.insertAdjacentHTML("beforeend", str);
+            dom().addText.value = "";
+          });
+          dom().btnDelete = document.querySelectorAll(".btn-delete");
+        } else {
+          dom().bookList.textContent = "Book is empty";
+        }
+      };
+      updateDom(books);
+
+      const addBook = (book) => {
+        books.push(book);
+      };
+
+      const deleteBook = (id) => {
+        const book = books.findIndex((e) => e.id == id);
+        books.splice(book, 1);
+      };
+
+      const searchBook = (key) => {
+        return books.filter((e) => e.title.includes(key));
+      };
+
+      dom().addBtn.addEventListener("click", (e) => {
+        e.preventDefault();
+        const title = dom().addText.value.trim();
+        const id = Date.now();
+        if (title != "") {
+          const book = new Book(id, title);
+          addBook(book);
+          updateDom(books);
+        }
+      });
+
+      dom().searchText.addEventListener("keyup", (e) => {
+        e.preventDefault();
+        const key = dom().searchText.value.trim();
+        if (key != "") {
+          console.log(key);
+          let books = searchBook(key);
+          updateDom(books);
+        } else {
+          updateDom(books);
+        }
+      });
+
+      dom().bookList.addEventListener("click", (e) => {
+        if (e.target == dom().btnDelete) {
+          const id = e.target.parentElement.id.split("-")[1];
+          books.splice(
+            books.findIndex((e) => e.id == id),
+            1
+          );
+          updateDom(books);
+        }
+      });
+    </script>
+  </body>
+</html>

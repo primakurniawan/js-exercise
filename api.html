@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Api</title>
+  </head>
+  <body>
+    <input type="text" id="search-text" />
+    <button id="get-data">Get Data</button>
+    <button id="post-data">Post Data</button>
+    <ul id="data-list">
+      <!-- <li id="data">
+        <span class="id">071</span>
+        <span class="name">prime</span>
+        <span class="kom">B</span>
+      </li> -->
+    </ul>
+    <script>
+      const searchText = document.getElementById("search-text");
+      const btnGetData = document.getElementById("get-data");
+      const btnPostData = document.getElementById("post-data");
+      const dataList = document.getElementById("data-list");
+      const apiKey = `c965042e`;
+
+      const showData = (data) => {
+        dataList.innerHTML = "";
+        console.log(data);
+        if (data.Response == "True") {
+          console.log(data.Search);
+          data.Search.forEach((e) => {
+            const li = `
+                <li class="data">
+                    <img src="${e.Poster}" alt="${e.Poster}><br/>
+                    <ul>
+                      <li class="id">${e.imdbID}</li>
+                      <li class="name">${e.Title}</li>
+                      <li class="kom">${e.Year}</li>                      
+                    </ul>
+                </li>`;
+            dataList.insertAdjacentHTML("beforeend", li);
+          });
+        } else {
+          dataList.textContent = data.Error;
+        }
+      };
+
+      //AJAX
+      // const getData = (method, url) => {
+      //   let data;
+      //   const xhr = new XMLHttpRequest();
+      //   xhr.open(method, url, true);
+      //   xhr.onload = () => {
+      //     if (xhr.status == 200) {
+      //       console.log(xhr.responseText);
+      //       showData(JSON.parse(xhr.responseText));
+      //     } else if (xhr.status == 404) {
+      //       showData("not found");
+      //     }
+      //   };
+      //   xhr.send();
+      // };
+
+      //Async await
+      const getData = async (method, url) => {
+        const res = await fetch(url, { method });
+        const data = await res.json();
+        console.log(data);
+        await showData(data);
+      };
+
+      searchText.addEventListener("keyup", (e) => {
+        e.preventDefault();
+        const s = searchText.value;
+        console.log(s);
+        const api = `http://www.omdbapi.com/?s=${s}&apikey=${apiKey}&page=1`;
+        console.log(api);
+        getData("GET", api);
+      });
+
+      btnGetData.addEventListener("click", (e) => {
+        e.preventDefault();
+        getData();
+      });
+
+      btnPostData.addEventListener("click", (e) => {
+        e.preventDefault();
+        postData();
+      });
+    </script>
+  </body>
+</html>

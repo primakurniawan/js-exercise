@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Array</title>
+  </head>
+  <body>
+    <script>
+      const arrObj = [
+        {
+          name: "iwan",
+          age: 49,
+        },
+        {
+          name: "anita sitorus",
+          age: 48,
+        },
+        {
+          name: "prima kurniawan",
+          age: 20,
+        },
+        {
+          name: "nazwa nasuha kurniawan",
+          age: 15,
+        },
+        {
+          name: "lulu bahira kurniawan",
+          age: 8,
+        },
+      ];
+
+      //filter
+      const filArr = arrObj.filter((e) => e.name.includes("kurniawan"));
+      //   console.log(filArr);
+
+      //map
+      const mapArr = arrObj.map((e) => {
+        e.birth = new Date().getFullYear() - e.age;
+        return e;
+      });
+      //   console.log(mapArr);
+
+      //sort
+      const sortArr = mapArr.sort((a, b) => (a.age < b.age ? -1 : 1));
+      //   console.table(sortArr);
+
+      //reduce
+      const totalAge = arrObj.reduce((total, value) => {
+        return (total += value.age);
+      }, 0);
+      //   console.log(totalAge);
+
+      //some
+      const someArr = arrObj.some((e) => e.age >= 17);
+
+      //every
+      const everyArr = arrObj.every((e) => e.age >= 17);
+
+      //find
+      const findArr = arrObj.find((e) => e.name.includes("kurniawan"));
+      //   console.log(findArr);
+
+      //find index
+      const findIndArr = arrObj.findIndex((e) => e.name.includes("kurniawan"));
+      //   console.log(findIndArr);
+
+      //splice
+      //   const splice = arrObj.splice(2);
+      //   console.table(splice);
+
+      //slice
+      const slice = arrObj.slice(2, 4);
+      console.table(slice);
+    </script>
+  </body>
+</html>

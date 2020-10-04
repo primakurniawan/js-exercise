@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Reference vs Primitive</title>
+  </head>
+  <body>
+    <script>
+      //Primitive
+      let x = 1;
+      let y = x;
+      x = 2;
+      console.log(x, y);
+
+      //Reference
+      let obj1 = {
+        id: 0,
+        name: "prime",
+      };
+      let obj2 = obj1;
+      obj2.id = 1;
+      console.table(obj1, obj2);
+
+      let arr1 = ["prima", "tondy", "arya", "kurniawan"];
+      let arr2 = arr1;
+      arr1[0] = "tamvan";
+      console.log(arr1, arr2);
+
+      //copy an array or an object
+      let obj3 = { ...obj1 };
+      obj1.name = "tamvan";
+      console.table(obj1);
+      console.table(obj3);
+
+      let arr3 = [...arr1];
+      arr1[0] = "jali";
+      console.log(arr1, arr3);
+    </script>
+  </body>
+</html>

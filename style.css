@@ -1,0 +1,121 @@
+:root {
+  --primary: #ff7f11;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root,
+html {
+  font-size: clamp(12px, 16px, 20px);
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+h1 {
+  font-size: 2rem;
+  font-weight: bold;
+}
+
+h2 {
+  font-size: 1.5rem;
+  font-weight: lighter;
+}
+
+h3 {
+  font-size: 1.25rem;
+  font-weight: bold;
+}
+
+h4 {
+  font-size: 1.15rem;
+  font-weight: bold;
+}
+
+p {
+  font-size: 1rem;
+}
+
+header {
+  background: linear-gradient(rgba(0, 0, 0, 0.75), #000),
+    url("./img/education-hero.jpg");
+  background-position: center;
+  background-size: cover;
+  background-attachment: fixed;
+  height: 100vh;
+  width: 100%;
+  color: white;
+  position: relative;
+  text-align: center;
+  text-transform: capitalize;
+}
+
+nav {
+  background-color: white;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+nav .logo {
+  color: var(--primary);
+  font-weight: bold;
+}
+
+nav ul li {
+  list-style: none;
+  display: inline-block;
+  margin: 1rem;
+}
+
+nav ul li a {
+  text-decoration: none;
+  color: #777;
+}
+
+.btn-reverse {
+  color: black !important;
+  border: 2px solid var(--primary);
+}
+
+header .text-hero {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+header .text-hero * {
+  margin: 1rem 0;
+}
+header .text-hero h2 {
+  color: #777;
+}
+
+header .text-hero .btn {
+  margin-top: 2rem;
+}
+
+.btn {
+  padding: 0.75rem 1rem;
+  color: white;
+  background-color: var(--primary);
+  display: inline-block;
+  font-weight: bold;
+  outline: none;
+  border: 2px solid var(--primary);
+  background: transparent;
+  border-radius: 5px;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+
+.flex {
+  display: flex;
+  height: 100vh;
+}
+
+.flex-2 {
+}

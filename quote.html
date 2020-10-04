@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Quote</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      body {
+        display: flex;
+        height: 100vh;
+        font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS",
+          sans-serif;
+      }
+      .container {
+        margin: auto;
+        text-align: center;
+      }
+
+      .container * {
+        margin: 1rem auto;
+        max-width: 500px;
+      }
+
+      .container img {
+        width: 200px;
+        height: 200px;
+        border-radius: 50%;
+      }
+
+      button {
+        padding: 1rem;
+        margin: 0 1rem;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <img id="img" src="./img/1.jpg" alt="" />
+      <h1 id="name"></h1>
+      <h2 id="position"></h2>
+      <p id="quote"></p>
+      <button id="min"><</button>
+      <button id="random">Random</button>
+      <button id="plus">></button>
+    </div>
+    <script>
+      const data = [
+        {
+          id: 0,
+          name: "prime",
+          position: "manager",
+          quote:
+            "Lorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur corporis repellendus quasi nisi adipisci quas, illum nihil, ratione porro similique, ex molestiae ipsa reiciendis labore. Cupiditate, vero explicabo! Recusandae, dolores.",
+        },
+        {
+          id: 1,
+          name: "raline",
+          position: "karyawan",
+          quote:
+            "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Nostrum quae dignissimos dicta exercitationem accusantium reiciendis quasi temporibus, dolore veritatis pariatur tempore nemo, deserunt aspernatur quibusdam inventore sit assumenda! Numquam, odit.",
+        },
+        {
+          id: 2,
+          name: "bayu",
+          position: "officeboy",
+          quote:
+            "Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolores obcaecati harum totam porro, laboriosam ullam facilis quae eaque repellat sit molestiae iste cumque vel ex. Libero excepturi sint ad atque. ",
+        },
+        {
+          id: 3,
+          name: "ani",
+          position: "ibu rumah tangga",
+          quote:
+            "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Adipisci perferendis natus esse placeat neque quibusdam saepe ab atque laudantium. Nulla quos obcaecati possimus labore qui. Praesentium, molestias culpa? Suscipit, deleniti!",
+        },
+      ];
+
+      const min = document.getElementById("min");
+      const random = document.getElementById("random");
+      const plus = document.getElementById("plus");
+
+      const image = document.getElementById("img");
+      const name = document.getElementById("name");
+      const position = document.getElementById("position");
+      const quote = document.getElementById("quote");
+
+      const generateRandomNumber = () => {
+        const randomNumber = Math.floor(Math.random() * data.length);
+        return randomNumber;
+      };
+
+      const generateData = () => {
+        const singleData = data[currentNumber];
+        return singleData;
+      };
+
+      let currentNumber = generateRandomNumber();
+      let singleData = data[currentNumber];
+
+      random.addEventListener("click", (e) => {
+        currentNumber = generateRandomNumber();
+        singleData = data[currentNumber];
+        showData();
+      });
+
+      min.addEventListener("click", (e) => {
+        currentNumber -= 1;
+        singleData = data[currentNumber];
+        showData();
+      });
+
+      plus.addEventListener("click", (e) => {
+        currentNumber += 1;
+        singleData = data[currentNumber];
+        showData();
+      });
+
+      const showData = () => {
+        image.src = "./img/" + singleData.id + ".jpg";
+        name.textContent = singleData.name;
+        position.textContent = singleData.position;
+        quote.textContent = singleData.quote;
+      };
+
+      showData();
+    </script>
+  </body>
+</html>
